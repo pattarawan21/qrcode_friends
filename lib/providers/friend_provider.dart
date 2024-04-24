@@ -35,7 +35,7 @@ class FriendNotifier extends StateNotifier<List<Friend>> {
     state = box.values.toList();
   }
 
-  void deleteFriend(Friend friend) async {
+  Future deleteFriend(Friend friend) async {
     final box = await Hive.openBox<Friend>('friend');
     final index = state.indexWhere((e) => e.id == friend.id);
     if (index >= 0) {

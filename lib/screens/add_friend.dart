@@ -1,9 +1,14 @@
+
+import 'package:qrcode_fr/models/friends.dart';
 import 'package:qrcode_fr/providers/friend_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddFriendScreen extends ConsumerStatefulWidget {
-  const AddFriendScreen({super.key});
+  final Friend? editName;
+  final bool isEdit;
+
+  const AddFriendScreen({super.key, this.editName, this.isEdit = false});
 
   @override
   ConsumerState<AddFriendScreen> createState() {
@@ -21,6 +26,15 @@ class _AddFriendScreenState extends ConsumerState<AddFriendScreen> {
       Navigator.of(context).pop();
     }
   }
+  void _editNameFriend() {
+    final enteredText = _titleController.text;
+    if (!enteredText.isEmpty) {
+      ref.read(FriendProvider.notifier).editFriend(widget.editName!.id.toString(), enteredText);
+      Navigator.of(context).pop();
+    }
+
+  }
+
 
   
   @override
@@ -32,25 +46,33 @@ class _AddFriendScreenState extends ConsumerState<AddFriendScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Friend'),
+       appBar: AppBar(
+        title: Text(
+          widget.editName != null
+              ? "Edit Name : ${widget.editName?.title}"
+              : "Add Friend ",
+        ),
+        actions: [
+          widget.isEdit
+              ? const SizedBox()
+              : IconButton(
+                  icon: const Icon(Icons.save),
+                  iconSize: 30,
+                  onPressed:
+                      widget.editName == null ? _saveFriend : _editNameFriend,
+                ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
             TextField(
-              decoration: const InputDecoration(labelText: 'Title'),
+              decoration: const InputDecoration(labelText: 'Name'),
               controller: _titleController,
               style: TextStyle(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton.icon(
-              onPressed: _saveFriend,
-              icon: const Icon(Icons.add),
-              label: const Text('Add Friend'),
             ),
           ],
         ),

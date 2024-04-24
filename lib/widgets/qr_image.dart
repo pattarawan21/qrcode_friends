@@ -76,14 +76,14 @@ class _PickQrState extends State<PickedQr> {
                 : TextButton.icon(
                     onPressed: _chooseImage,
                     icon: const Icon(Icons.photo),
-                    label: const Text("Open Gallery"),
+                    label: const Text("Gallery"),
                   ),
             widget.isEdit
                 ? const SizedBox()
                 : TextButton.icon(
                     onPressed: _takePhoto,
                     icon: const Icon(Icons.camera),
-                    label: const Text("Open camera"),
+                    label: const Text("Camera"),
                   ),
           ],
         )

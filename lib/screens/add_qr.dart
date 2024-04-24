@@ -59,9 +59,8 @@ class _AddQrcode extends ConsumerState<AddQrcode> {
     if (name.isEmpty || image == null) {
       return;
     }
-    final myid = widget.editQrcode!.id;
     final newQr = QrCode(
-      id: myid,
+      id: widget.editQrcode!.id,
       title: name,
       imagebytes: await image.readAsBytes(),
     );

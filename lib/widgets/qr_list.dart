@@ -91,14 +91,14 @@ class _QrListState extends ConsumerState<QrList> {
                                           );
                                         },
                                       ),
-                              //  IconButton(
-                              //           icon: const Icon(Icons.delete),
-                              //           onPressed: () {
-                              //             ref
-                              //                 .read(FriendProvider.notifier)
-                              //                 .deleteQrcode(
-                              //                     widget.friend, qrCode[index]);
-                              //           }),
+                               IconButton(
+                                        icon: const Icon(Icons.delete),
+                                        onPressed: () {
+                                          ref
+                                              .read(FriendProvider.notifier)
+                                              .deleteQrcode(
+                                                  widget.friend, qrCode[index]);
+                                        }),
                               ],
                             ),
                           ),
