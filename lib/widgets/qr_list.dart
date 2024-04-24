@@ -40,7 +40,7 @@ class _QrListState extends ConsumerState<QrList> {
     
       body: Consumer(builder: (context, watch, child) {
         final qrCode = ref
-            .watch(FriendProvider)
+            .watch(friendProvider)
             .where((element) => element.id == widget.friend.id)
             .first
             .qrcode;
@@ -95,7 +95,7 @@ class _QrListState extends ConsumerState<QrList> {
                                         icon: const Icon(Icons.delete),
                                         onPressed: () {
                                           ref
-                                              .read(FriendProvider.notifier)
+                                              .read(friendProvider.notifier)
                                               .deleteQrcode(
                                                   widget.friend, qrCode[index]);
                                         }),

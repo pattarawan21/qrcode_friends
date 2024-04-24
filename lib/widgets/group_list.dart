@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:qrcode_fr/models/friends.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:qrcode_fr/providers/friend_provider.dart';
-import 'package:qrcode_fr/screens/add_friend.dart';
-import 'package:qrcode_fr/widgets/qr_list.dart';
+import 'package:qrcode_fr/providers/group_provider.dart';
+import 'package:qrcode_fr/screens/add_group.dart';
+import 'package:qrcode_fr/widgets/friend_list.dart';
 
-class FriendList extends ConsumerStatefulWidget {
-  const FriendList({super.key, required this.friends});
+
+class GroupList extends ConsumerStatefulWidget {
+  const GroupList(this.group, {super.key});
 
   @override
-  ConsumerState<FriendList> createState() => _FriendListState();
+  ConsumerState<GroupList> createState() => _GroupListState();
 
-  final List<Friend> friends;
+  final List<GroupFriend> group;
 }
 
-class _FriendListState extends ConsumerState<FriendList> {
+class _GroupListState extends ConsumerState<GroupList> {
   @override
   Widget build(BuildContext context) {
-    if (widget.friends.isEmpty) {
+    if (widget.group.isEmpty) {
       return Center(
         child: Text(
-          'No Friend added yet',
+          'No group added yet',
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
@@ -29,16 +30,16 @@ class _FriendListState extends ConsumerState<FriendList> {
     }
 
     return ListView.builder(
-      itemCount: widget.friends.length,
+      itemCount: widget.group.length,
       itemBuilder: (ctx, index) => ListTile(
         title: Text(
-          widget.friends[index].title,
+          widget.group[index].title,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
         ),
         subtitle: Text(
-          widget.friends[index].qrcode.length.toString() + ' Qr Codes',
+          widget.group[index].listfriend.length.toString(),
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
@@ -53,8 +54,8 @@ class _FriendListState extends ConsumerState<FriendList> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (ctx) => AddFriendScreen(
-                        editName: widget.friends[index],
+                      builder: (ctx) => AddGroupScreen(
+                        editName: widget.group[index],
                       ),
                     ),
                   );
@@ -64,8 +65,8 @@ class _FriendListState extends ConsumerState<FriendList> {
                   icon: const Icon(Icons.delete),
                   onPressed: () async {
                     await ref
-                        .read(friendProvider.notifier)
-                        .deleteFriend(widget.friends[index]);
+                        .read(groupFriendProvider.notifier)
+                        .deleteFriend(widget.group[index]);
                   }),
             ],
           ),
@@ -73,9 +74,9 @@ class _FriendListState extends ConsumerState<FriendList> {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (ctx) => QrList(
-                friend: widget.friends[index],
-              ),
+              builder: (ctx) => FriendList(
+                friends: widget.group[index].listfriend,
+            ),
             ),
           );
         },

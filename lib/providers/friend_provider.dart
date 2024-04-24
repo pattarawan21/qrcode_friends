@@ -43,8 +43,8 @@ class FriendNotifier extends StateNotifier<List<Friend>> {
       state = box.values.toList();
     }
   }
-
-  void addQrcode(Friend friend, QrCode qrcode) async {
+   
+ void addQrcode(Friend friend, QrCode qrcode) async {
     final box = await Hive.openBox<Friend>('friend');
     final index = friends.values.toList().indexWhere((e) => e.id == friend.id);
     if (index >= 0) {
@@ -76,7 +76,6 @@ class FriendNotifier extends StateNotifier<List<Friend>> {
     }
   }
 }
-
-final FriendProvider =
+final friendProvider =
     StateNotifierProvider<FriendNotifier, List<Friend>>(
         (ref) => FriendNotifier());

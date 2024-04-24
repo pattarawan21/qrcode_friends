@@ -6,18 +6,7 @@ part 'friends.g.dart';
 
 const  uuid = Uuid();
 
-// class GroupFriend {
-//   GroupFriend({
-//     required this.title,
-//     String? id,
-//     List<Friend>? listfriend
-//   }) : id = id ?? uuid.v4(),
-//     listfriend = listfriend ?? [];
 
-//   String? id;
-//   final String title;
-//   List<Friend> listfriend;
-// }
 @HiveType(typeId: 1)
 class Friend {
   Friend({
@@ -50,4 +39,20 @@ class QrCode {
   final String title;
   @HiveField(2)
   Uint8List imagebytes;
+}
+
+@HiveType(typeId: 3)
+class GroupFriend {
+  GroupFriend({
+    required this.title,
+    String? id,
+    List<Friend>? listfriend
+  }) : id = id ?? uuid.v4(),
+    listfriend = listfriend ?? [];
+  @HiveField(0)
+  String? id;
+  @HiveField(1)
+  final String title;
+  @HiveField(2)
+  List<Friend> listfriend;
 }

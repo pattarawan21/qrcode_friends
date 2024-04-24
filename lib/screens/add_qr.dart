@@ -50,7 +50,7 @@ class _AddQrcode extends ConsumerState<AddQrcode> {
       title: name,
       imagebytes: await image.readAsBytes(),
     );
-    ref.read(FriendProvider.notifier).addQrcode(widget.friend, newQr);
+    ref.read(friendProvider.notifier).addQrcode(widget.friend, newQr);
     Navigator.of(context).pop();
   }
     void _editQrcode() async{
@@ -64,7 +64,7 @@ class _AddQrcode extends ConsumerState<AddQrcode> {
       title: name,
       imagebytes: await image.readAsBytes(),
     );
-    ref.read(FriendProvider.notifier).editQrcode(widget.friend, newQr);
+    ref.read(friendProvider.notifier).editQrcode(widget.friend, newQr);
     Navigator.of(context).pop();
   }
   @override

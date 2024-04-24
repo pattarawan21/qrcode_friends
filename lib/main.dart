@@ -32,8 +32,10 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(FriendAdapter());
   Hive.registerAdapter(QrCodeAdapter());
+  Hive.registerAdapter(GroupFriendAdapter());
   await Hive.openBox<Friend>('friend');
   await Hive.openBox<QrCode>('qrcode');
+  await Hive.openBox<GroupFriend>('groupfriend');
 
 
   runApp(

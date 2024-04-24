@@ -1,37 +1,37 @@
 import 'package:qrcode_fr/models/friends.dart';
-import 'package:qrcode_fr/providers/friend_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:qrcode_fr/providers/group_provider.dart';
 
-class AddFriendScreen extends ConsumerStatefulWidget {
-  final Friend? editName;
+class AddGroupScreen extends ConsumerStatefulWidget {
+  final GroupFriend? editName;
   final bool isEdit;
 
-  const AddFriendScreen({super.key, this.editName, this.isEdit = false});
+  const AddGroupScreen({super.key, this.editName, this.isEdit = false});
 
   @override
-  ConsumerState<AddFriendScreen> createState() {
-    return _AddFriendScreenState();
+  ConsumerState<AddGroupScreen> createState() {
+    return _AddGroupScreenState();
   }
 }
 
-class _AddFriendScreenState extends ConsumerState<AddFriendScreen> {
+class _AddGroupScreenState extends ConsumerState<AddGroupScreen> {
   final _titleController = TextEditingController();
 
-  void _saveFriend() {
+  void _saveGroup() {
     final enteredText = _titleController.text;
     if (!enteredText.isEmpty) {
-      ref.read(friendProvider.notifier).addFriend(enteredText);
+      ref.read(groupFriendProvider.notifier).addGroupFriend(enteredText);
       Navigator.of(context).pop();
     }
   }
 
-  void _editNameFriend() {
+  void _editNameGroup() {
     final enteredText = _titleController.text;
     if (!enteredText.isEmpty) {
       ref
-          .read(friendProvider.notifier)
-          .editFriend(widget.editName!.id.toString(), enteredText);
+          .read(groupFriendProvider.notifier)
+          .editGroupFriend(widget.editName!.id.toString(), enteredText);
       Navigator.of(context).pop();
     }
   }
@@ -49,7 +49,7 @@ class _AddFriendScreenState extends ConsumerState<AddFriendScreen> {
         title: Text(
           widget.editName != null
               ? "Edit Name : ${widget.editName?.title}"
-              : "Add Friend",
+              : "Add Group",
         ),
       ),
       body: SingleChildScrollView(
@@ -68,7 +68,7 @@ class _AddFriendScreenState extends ConsumerState<AddFriendScreen> {
               children: [
                 ElevatedButton(
                   onPressed:
-                      widget.editName == null ? _saveFriend : _editNameFriend,
+                      widget.editName == null ? _saveGroup : _editNameGroup,
                   child: const Text('Save'),
                 ),
               ],
