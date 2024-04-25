@@ -84,6 +84,9 @@ class _AddGroupScreenState extends ConsumerState<AddGroupScreen> {
                 color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
+            widget.editName != null
+                ? const SizedBox()
+                :
             ListView.builder(
               shrinkWrap: true,
               itemCount: allFriends.length,

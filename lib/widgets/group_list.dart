@@ -3,6 +3,7 @@ import 'package:qrcode_fr/models/friends.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qrcode_fr/providers/group_provider.dart';
 import 'package:qrcode_fr/screens/add_group.dart';
+import 'package:qrcode_fr/screens/showfriend.dart';
 
 class GroupList extends ConsumerStatefulWidget {
   const GroupList(this.group, {super.key});
@@ -64,18 +65,18 @@ class _GroupListState extends ConsumerState<GroupList> {
                   onPressed: () async {
                     await ref
                         .read(groupFriendProvider.notifier)
-                        .deleteFriend(widget.group[index]);
+                        .deleteGroupFriend(widget.group[index]);
                   }),
             ],
           ),
         ),
         onTap: () {
-          // Navigator.of(context).push(
-          //   MaterialPageRoute(
-          //     builder: (ctx) =>
-          //         GroupFriendsScreen(groupId: widget.group[index].id),
-          //   ),
-          // );
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) =>
+                  GroupFriendsScreen(id: widget.group[index].id),
+            ),
+          );
         },
       ),
     );

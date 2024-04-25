@@ -22,7 +22,7 @@ class GroupFriendNotifier extends StateNotifier<List<GroupFriend>> {
   // }
   Future<String> addGroupFriend(String title) async {
   // Generate a new ID for the group
-  String newGroupId = Uuid().v1(); // Using the uuid package to generate a unique ID
+  String newGroupId = Uuid().v4(); // Using the uuid package to generate a unique ID
 
   // Create a new group with the entered title and the new ID
   GroupFriend newGroup = GroupFriend(id: newGroupId, title: title, listfriend: []);
@@ -67,13 +67,23 @@ class GroupFriendNotifier extends StateNotifier<List<GroupFriend>> {
     state = box.values.toList();
   }
 
-  Future deleteFriend(GroupFriend friend) async {
+  Future deleteGroupFriend(GroupFriend friend) async {
     final box = await Hive.openBox<GroupFriend>('groupfriend');
     final index = state.indexWhere((e) => e.id == friend.id);
     if (index >= 0) {
       await box.deleteAt(index);
       state = box.values.toList();
     }
+  }
+}
+Future<List<Friend>> getFriendsInGroup(String id) async {
+  final box = await Hive.openBox<GroupFriend>('groupFriend');
+  GroupFriend? group = box.get(id);
+
+  if (group != null) {
+    return group.listfriend;
+  } else {
+    return [];
   }
 }
 
