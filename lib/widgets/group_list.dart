@@ -3,8 +3,6 @@ import 'package:qrcode_fr/models/friends.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qrcode_fr/providers/group_provider.dart';
 import 'package:qrcode_fr/screens/add_group.dart';
-import 'package:qrcode_fr/widgets/friend_list.dart';
-
 
 class GroupList extends ConsumerStatefulWidget {
   const GroupList(this.group, {super.key});
@@ -46,7 +44,7 @@ class _GroupListState extends ConsumerState<GroupList> {
         ),
         trailing: SizedBox(
           width: 100,
-          child: Row( 
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
@@ -72,13 +70,12 @@ class _GroupListState extends ConsumerState<GroupList> {
           ),
         ),
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (ctx) => FriendList(
-                friends: widget.group[index].listfriend,
-            ),
-            ),
-          );
+          // Navigator.of(context).push(
+          //   MaterialPageRoute(
+          //     builder: (ctx) =>
+          //         GroupFriendsScreen(groupId: widget.group[index].id),
+          //   ),
+          // );
         },
       ),
     );
