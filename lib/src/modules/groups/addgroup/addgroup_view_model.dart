@@ -10,15 +10,17 @@ class AddGroupViewModel{
   required WidgetRef ref,
   required List<Friend> friendsToAdd,
   required TextEditingController titleController,
-})  {
+}) async {
   final enteredText = titleController.text;
+  String groupID = '';
   if (!enteredText.isEmpty)  {
-    ref.read(groupFriendProvider.notifier).tryAddGroupFriend(enteredText);
-  }
+    groupID = await  ref.read(groupFriendProvider.notifier).tryAddGroupFriend(enteredText);
+  
     ref.read(groupFriendProvider.notifier).tryAddFriendToGroup(
-      ref.read(groupFriendProvider).last.id!,
+      groupID,
       friendsToAdd,
     );
+  }
     Navigator.of(context).pop();
 }
    static void editNameGroup({

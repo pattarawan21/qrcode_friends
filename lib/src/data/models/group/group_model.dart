@@ -34,11 +34,11 @@ class GroupFriendNotifier extends StateNotifier<List<GroupFriend>> {
     state = await _groupService.loadUser();
   }
 
-  void tryAddGroupFriend(String title) async {
+  Future <String> tryAddGroupFriend(String title) async {
     //state = await _groupService.addGroupFriend(title) 
     Map<String, dynamic> result = await _groupService.addGroupFriend(title);
     state = result['state'] as List<GroupFriend>;
-
+    return result['id'] as String;
   }
 
   void tryAddFriendToGroup(String groupId, List<Friend> newList) async {
