@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:qrcode_fr/src/common/constants/icon_constant.dart';
-import 'package:qrcode_fr/src/data/models/friend/friend_model.dart';
-import 'package:qrcode_fr/src/modules/friends/addfriend/addfriend_view.dart';
-import 'package:qrcode_fr/src/modules/qrcodes/showqrcode/showqrcodelist_view.dart';
+import 'package:qrcode_fr/src/data/models/group/group_model.dart';
+import 'package:qrcode_fr/src/modules/groups/addgroup/addgroup_view.dart';
+import 'package:qrcode_fr/src/modules/groups/showgroup/showfriendingroup_view.dart';
 
 
-class ShowFriendViewModel extends ConsumerStatefulWidget {
-  const ShowFriendViewModel ({super.key, required this.friends});
+
+class ShowListGroupFriendView extends ConsumerStatefulWidget {
+  const ShowListGroupFriendView(this.group, {super.key});
 
   @override
-  ConsumerState<ShowFriendViewModel> createState() => _ShowFriendViewModelState();
+  ConsumerState<ShowListGroupFriendView> createState() => _ShowListGroupFriendViewState();
 
-  final List<Friend> friends;
+  final List<GroupFriend> group;
 }
 
-class _ShowFriendViewModelState extends ConsumerState<ShowFriendViewModel > {
+class _ShowListGroupFriendViewState extends ConsumerState<ShowListGroupFriendView> {
   @override
   Widget build(BuildContext context) {
-    if (widget.friends.isEmpty) {
+    if (widget.group.isEmpty) {
       return Center(
         child: Text(
-          'No Friend added yet',
+          'No group added yet',
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
@@ -30,54 +30,52 @@ class _ShowFriendViewModelState extends ConsumerState<ShowFriendViewModel > {
     }
 
     return ListView.builder(
-      itemCount: widget.friends.length,
+      itemCount: widget.group.length,
       itemBuilder: (ctx, index) => ListTile(
         title: Text(
-          widget.friends[index].title,
+          widget.group[index].title,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
         ),
         subtitle: Text(
-          widget.friends[index].qrcode.length.toString() + ' Qr Codes',
+          widget.group[index].listfriend.length.toString(),
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
               ),
         ),
         trailing: SizedBox(
           width: 100,
-          child: Row( 
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                icon: IconConstant().iconEdit,
+                icon: const Icon(Icons.edit),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (ctx) => AddFriendViewScreen(
-                        editName: widget.friends[index],
+                      builder: (ctx) => AddGroupViewScreen(
+                        editName: widget.group[index],
                       ),
                     ),
                   );
                 },
               ),
               IconButton(
-                  icon: IconConstant().iconDelete,
-                  onPressed:()  {
+                  icon: const Icon(Icons.delete),
+                  onPressed: () {
                      ref
-                        .read(friendProvider.notifier)
-                        .tryDeleteFriend(widget.friends[index]);
-                  }
-                  ),
+                        .read(groupFriendProvider.notifier)
+                        .tryDeleteGroupFriend(widget.group[index]);
+                  }),
             ],
           ),
         ),
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (ctx) => ShowQrcodeListView(
-                friend: widget.friends[index],
-              ),
+              builder: (ctx) =>
+                  ShowFriendinGroupScreen(id: widget.group[index].id),
             ),
           );
         },

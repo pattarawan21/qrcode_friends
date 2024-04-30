@@ -52,15 +52,15 @@ class _AddFriendViewScreenState extends ConsumerState<AddFriendViewScreen> {
                   onPressed: () {
                     if (widget.editName == null) {
                       AddFriendViewModel.saveFriend(
-                          context: context,
                           ref: ref,
                           titleController: _titleController);
+                      Navigator.of(context).pop();
                     } else {
                       AddFriendViewModel.editNameFriend(
-                          context: context,
                           ref: ref,
                           titleController: _titleController,
                           widget: widget);
+                      Navigator.of(context).pop();
                     }
                   },
                   child: const Text('Save'),

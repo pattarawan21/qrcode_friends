@@ -53,18 +53,18 @@ class _AddQrcodeView extends ConsumerState<AddQrcodeView> {
                   onPressed: () {
                     if (widget.editQrcode == null) {
                       AddQrcodeViewModel.saveQrcode(
-                          context: context,
                           ref: ref,
                           titleController: titleController,
                           widget: widget,
                           selectedImage: _selectedImage);
+                      Navigator.of(context).pop();
                     } else {
                       AddQrcodeViewModel.editQrcode(
-                          context: context,
                           ref: ref,
                           titleController: titleController,
                           widget: widget,
                           selectedImage: _selectedImage);
+                      Navigator.of(context).pop();
                     }
                   },
                 ),

@@ -81,17 +81,17 @@ class _AddGroupViewScreenState extends ConsumerState<AddGroupViewScreen> {
                   onPressed: () {
                     if (widget.editName == null) {
                       AddGroupViewModel.saveGroup(
-                          context: context,
                           ref: ref,
                           titleController: _titleController,
                           friendsToAdd: selectedFriends,
                           );
+                      Navigator.of(context).pop();
                     } else {
                       AddGroupViewModel.editNameGroup(
-                          context: context,
                           ref: ref,
                           titleController: _titleController,
                           widget: widget);
+                      Navigator.of(context).pop();
                     }
                   },
                   child: const Text('Save'),

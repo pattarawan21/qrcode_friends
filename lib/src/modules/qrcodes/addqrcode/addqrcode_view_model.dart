@@ -16,7 +16,6 @@ class AddQrcodeViewModel{
   return file.writeAsBytes(data);
 }
  static void saveQrcode({
-    required BuildContext context,
     required WidgetRef ref,
     required TextEditingController titleController,
     required AddQrcodeView widget,
@@ -33,10 +32,8 @@ class AddQrcodeViewModel{
       imagebytes: await image.readAsBytes(),
     );
     ref.read(friendProvider.notifier).tryAddQrcode(widget.friend, newQr);
-    Navigator.of(context).pop();
   }
   static void editQrcode({
-    required BuildContext context,
     required WidgetRef ref,
     required TextEditingController titleController,
     required AddQrcodeView widget,
@@ -53,7 +50,6 @@ class AddQrcodeViewModel{
       imagebytes: await image.readAsBytes(),
     );
     ref.read(friendProvider.notifier).tryEditQrcode(widget.friend, newQr);
-    Navigator.of(context).pop();
   }
 
 }

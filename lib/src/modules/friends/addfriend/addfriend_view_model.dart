@@ -5,7 +5,6 @@ import 'package:qrcode_fr/src/modules/friends/addfriend/addfriend_view.dart';
 
 class AddFriendViewModel {
   static void saveFriend({
-    required BuildContext context,
     required WidgetRef ref,
     required TextEditingController titleController,
   })  {
@@ -13,12 +12,10 @@ class AddFriendViewModel {
     final enteredText = titleController.text;
     if (!enteredText.isEmpty) {
       ref.read(friendProvider.notifier).tryAddFriend(enteredText);
-      Navigator.of(context).pop();
     }
   }
 
   static void editNameFriend({
-    required BuildContext context,
     required WidgetRef ref,
     required TextEditingController titleController,
     required AddFriendViewScreen widget,
@@ -28,7 +25,7 @@ class AddFriendViewModel {
       ref
           .read(friendProvider.notifier)
           .tryEditFriend(widget.editName!.id.toString(), enteredText);
-      Navigator.of(context).pop();
+      
     }
   }
 }

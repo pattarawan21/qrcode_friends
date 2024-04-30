@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qrcode_fr/src/common/constants/icon_constant.dart';
 import 'package:qrcode_fr/src/data/models/group/group_model.dart';
 import 'package:qrcode_fr/src/modules/groups/addgroup/addgroup_view.dart';
-import 'package:qrcode_fr/src/modules/groups/showgroup/showgroup_view_model.dart';
+import 'package:qrcode_fr/src/modules/groups/showgroup/showlistgroup_view.dart';
 
 
 class GroupFriendViewScreen extends ConsumerStatefulWidget {
@@ -33,7 +33,7 @@ class _GroupFriendViewScreenState extends ConsumerState<GroupFriendViewScreen> {
           ),
         ],
       ),
-       body: ShowGroupFriendViewModel(groupfriendList),
+       body: ShowListGroupFriendView(groupfriendList),
     );
   }
 }

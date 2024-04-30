@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qrcode_fr/src/common/constants/icon_constant.dart';
 import 'package:qrcode_fr/src/data/models/friend/friend_model.dart';
 import 'package:qrcode_fr/src/modules/friends/addfriend/addfriend_view.dart';
-import 'package:qrcode_fr/src/modules/friends/showfriend/showfriend_view_model.dart';
+import 'package:qrcode_fr/src/modules/friends/showfriend/showlistfriend_view.dart';
 import 'package:qrcode_fr/src/modules/groups/showgroup/showgroup_view.dart';
 
 
@@ -43,7 +43,7 @@ class _ShowFriendViewScreenState extends ConsumerState<ShowFriendViewScreen> {
           ),
         ],
       ),
-      body: ShowFriendViewModel(friends: friendList,)
+      body: ShowListFriendView(friends: friendList,)
     );
   }
 }
