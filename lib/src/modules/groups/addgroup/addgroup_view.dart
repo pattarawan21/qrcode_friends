@@ -90,7 +90,9 @@ class _AddGroupViewScreenState extends ConsumerState<AddGroupViewScreen> {
                       AddGroupViewModel.editNameGroup(
                           ref: ref,
                           titleController: _titleController,
-                          widget: widget);
+                          groupfriend: widget.editName!,
+                          groupId: widget.editName!.id.toString(),
+                          );
                       Navigator.of(context).pop();
                     }
                   },

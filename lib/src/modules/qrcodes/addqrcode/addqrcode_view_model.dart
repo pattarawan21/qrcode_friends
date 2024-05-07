@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qrcode_fr/src/data/models/friend/friend_model.dart';
-import 'package:qrcode_fr/src/modules/qrcodes/addqrcode/addqrcode_view.dart';
+
 
 class AddQrcodeViewModel{
 
@@ -15,10 +15,10 @@ class AddQrcodeViewModel{
   File file = File('$tempPath/$fileName');
   return file.writeAsBytes(data);
 }
- static void saveQrcode({
+ static Future <void> saveQrcode({
     required WidgetRef ref,
     required TextEditingController titleController,
-    required AddQrcodeView widget,
+    required Friend friend,
     required File? selectedImage,
   })  async {
     final name = titleController.text;
@@ -31,12 +31,13 @@ class AddQrcodeViewModel{
       title: name,
       imagebytes: await image.readAsBytes(),
     );
-    ref.read(friendProvider.notifier).tryAddQrcode(widget.friend, newQr);
+    ref.read(friendProvider.notifier).tryAddQrcode(friend, newQr);
   }
-  static void editQrcode({
+  static Future<void> editQrcode({
     required WidgetRef ref,
     required TextEditingController titleController,
-    required AddQrcodeView widget,
+    required Friend friend,
+    required QrCode qrId,
     required File? selectedImage,
   })  async{
     final name = titleController.text;
@@ -45,11 +46,11 @@ class AddQrcodeViewModel{
       return;
     }
     final newQr = QrCode(
-      id: widget.editQrcode!.id,
+      id: qrId.id,
       title: name,
       imagebytes: await image.readAsBytes(),
     );
-    ref.read(friendProvider.notifier).tryEditQrcode(widget.friend, newQr);
+    ref.read(friendProvider.notifier).tryEditQrcode(friend, newQr);
   }
 
 }
