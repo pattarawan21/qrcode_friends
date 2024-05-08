@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qrcode_fr/src/data/models/friend/friend_model.dart';
-import 'package:qrcode_fr/src/modules/friends/addfriend/addfriend_view.dart';
 
 class AddFriendViewModel {
   static void saveFriend({
@@ -18,13 +17,14 @@ class AddFriendViewModel {
   static void editNameFriend({
     required WidgetRef ref,
     required TextEditingController titleController,
-    required AddFriendViewScreen widget,
+    required Friend friend,
+    required String friendId,
   }) {
     final enteredText = titleController.text;
     if (!enteredText.isEmpty) {
       ref
           .read(friendProvider.notifier)
-          .tryEditFriend(widget.editName!.id.toString(), enteredText);
+          .tryEditFriend(friend.id.toString(), enteredText);
       
     }
   }

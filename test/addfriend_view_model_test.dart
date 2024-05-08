@@ -26,6 +26,11 @@ void main() {
       AddFriendViewModel.saveFriend(ref: mockRef, titleController: mockController);
       verify(() => mockRef.read(friendProvider.notifier).tryAddFriend('test friend')).called(1);
     });
+
+    test('editNameFriend should call tryEditFriend with entered text', () {
+      AddFriendViewModel.editNameFriend(ref: mockRef, titleController: mockController, friend: Friend(id: '1', title: 'test friend'), friendId: '1');
+      verify(() => mockRef.read(friendProvider.notifier).tryEditFriend('1', 'test')).called(1);
+    });
  
   });
 }

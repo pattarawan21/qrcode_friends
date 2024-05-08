@@ -59,7 +59,8 @@ class _AddFriendViewScreenState extends ConsumerState<AddFriendViewScreen> {
                       AddFriendViewModel.editNameFriend(
                           ref: ref,
                           titleController: _titleController,
-                          widget: widget);
+                          friend: widget.editName!,
+                          friendId: widget.editName!.id.toString());
                       Navigator.of(context).pop();
                     }
                   },
